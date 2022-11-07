@@ -1,0 +1,46 @@
+version: '3.1'
+
+volumes:
+  mongo_volume:
+
+networks:
+  net_app:
+    driver: bridge
+
+services:
+  app:
+    image: franciscofrancod/rotten-potatoes:v1
+    depends_on:
+      - dbmongo
+    networks:
+      - net_app
+    ports:
+      - 5000:5000
+
+  dbmongo:
+    image: mongo:4.4.6
+    restart: always
+    networks:
+      - net_app
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_volume:/data/mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopwd
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    networks:
+      - net_app
+    ports:
+      - 8081:8081
+    volumes:
+      - mongo_volume:/data/mongodb
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongouser
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongopwd
+      ME_CONFIG_MONGODB_URL: mongodb://mongouser:mongopwd@mongo:27017/
+
