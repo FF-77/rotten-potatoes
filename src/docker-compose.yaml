@@ -29,6 +29,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongouser
       MONGO_INITDB_ROOT_PASSWORD: mongopwd
+      MONGODB_PORT: 27017
+      MONGODB_DB: admin
+      MONGODB_HOST: localhost
 
   mongo-express:
     image: mongo-express
