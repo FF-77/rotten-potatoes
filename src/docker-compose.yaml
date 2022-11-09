@@ -42,5 +42,5 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: mongouser
       ME_CONFIG_MONGODB_ADMINPASSWORD: mongopwd
-      ME_CONFIG_MONGODB_URL: mongodb://mongouser:mongopwd@mongo:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://mongouser:mongopwd@dbmongo:27017/
 
